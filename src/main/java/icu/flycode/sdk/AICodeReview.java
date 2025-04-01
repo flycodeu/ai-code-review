@@ -42,7 +42,7 @@ public class AICodeReview {
         //String codeReview = getCodeReview(diffCode);
 
         // 7. 创建仓库文件
-        String codeToken = getEnv("CODE_TOKEN");
+        String codeToken = getEnv("GITHUB_TOKEN");
         String s = writeLogs(codeToken, "hello");
         System.out.println(s);
     }
