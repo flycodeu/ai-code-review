@@ -21,29 +21,29 @@ import java.util.Random;
 public class AICodeReview {
 
     public static void main(String[] args) throws Exception {
-//        // 1. 作者名
-//        String author = getGitInfo("%an");
-//        System.out.println("Author: " + author);
-//        // 2. 日期
-//        String date = getGitInfo("%cd");
-//        System.out.println("Date: " + date);
-//        // 3. 描述
-//        String description = getGitInfo("%s");
-//        System.out.println("Description: " + description);
-//        // 4. 哈希值，用于获取提交代码
-//        String hashCode = getGitInfo("%h");
-//        System.out.println("Hash Code: " + hashCode);
-//
-//        // 5. 获取提交代码
-//        String diffCode = getDiffCode(hashCode);
-//        System.out.println(diffCode);
+        // 1. 作者名
+        String author = getGitInfo("%an");
+        System.out.println("Author: " + author);
+        // 2. 日期
+        String date = getGitInfo("%cd");
+        System.out.println("Date: " + date);
+        // 3. 描述
+        String description = getGitInfo("%s");
+        System.out.println("Description: " + description);
+        // 4. 哈希值，用于获取提交代码
+        String hashCode = getGitInfo("%h");
+        System.out.println("Hash Code: " + hashCode);
+
+        // 5. 获取提交代码
+        String diffCode = getDiffCode(hashCode);
+        System.out.println(diffCode);
 
         // 6. 代码评审
-        //String codeReview = getCodeReview(diffCode);
+        String codeReview = getCodeReview(diffCode);
 
         // 7. 创建仓库文件
         String codeToken = getEnv("GITHUB_TOKEN");
-        String s = writeLogs(codeToken, "hello");
+        String s = writeLogs(codeToken, codeReview);
         System.out.println(s);
     }
 
