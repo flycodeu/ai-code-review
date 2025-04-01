@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>icu.flycode</groupId>
-    <artifactId>ai-code-view-sdk</artifactId>
+    <artifactId>ai-code-view</artifactId>
     <version>1.0</version>
 
     <properties>
@@ -135,6 +135,16 @@
                 </executions>
                 <!-- 如果你用了三方jar，不想一个个确定的引入，可以去掉 configuration 以及以内的配置，这样会全部打包 -->
                 <configuration>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
                     <artifactSet>
                         <includes>
                             <include>com.google.guava:guava:jar:</include>

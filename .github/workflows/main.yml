@@ -25,9 +25,9 @@ jobs:
         run: mvn clean install
       # 复制AI自动评审组件jar包到Github服务器的libs目录下
       - name: Copy openai-code-review-sdk JAR
-        run: mvn dependency:copy -Dartifact=icu.flycode:ai-code-view-sdk:1.0 -DoutputDirectory=./libs
+        run: mvn dependency:copy -Dartifact=icu.flycode:ai-code-view:1.0 -DoutputDirectory=./libs
 
       - name: Run OpenAiCodeReview
-        run: java -jar ./libs/ai-code-view-sdk-1.0.jar
+        run: java -jar ./libs/ai-code-view-1.0.jar
         env:
           GITHUB_TOKEN: ${{ secrets.CODE_TOKEN }}
