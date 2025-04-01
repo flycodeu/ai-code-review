@@ -42,11 +42,18 @@ public class AICodeReview {
         //String codeReview = getCodeReview(diffCode);
 
         // 7. 创建仓库文件
-        String token = "";
-        String s = writeLogs(token, "hello");
+        String codeToken = getEnv("CODE_TOKEN");
+        String s = writeLogs(codeToken, "hello");
         System.out.println(s);
     }
 
+    public static String getEnv(String key) {
+        String token = System.getenv(key);
+        if (null == token || token.isEmpty()) {
+            throw new RuntimeException(key + ":value is empty");
+        }
+        return token;
+    }
 
     public static String getGitInfo(String tags) throws IOException {
         ProcessBuilder logProcessBuilder = new ProcessBuilder("git", "log", "-1", "--pretty=format:" + tags);
