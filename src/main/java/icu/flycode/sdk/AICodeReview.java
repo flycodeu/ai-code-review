@@ -39,7 +39,8 @@ public class AICodeReview {
         System.out.println(diffCode);
 
         // 6. 代码评审
-        String codeReview = getCodeReview(diffCode);
+        String apikey = getEnv("API_KEY");
+        String codeReview = getCodeReview(apikey, diffCode);
 
         // 7. 创建仓库文件
         String codeToken = getEnv("GITHUB_TOKEN");
@@ -80,16 +81,15 @@ public class AICodeReview {
         return processOutput.toString();
     }
 
-    private static String getCodeReview(String diffCode) throws Exception {
+    private static String getCodeReview(String apikey, String diffCode) throws Exception {
         // 1. 获取key
-        String apiKey = "test";
 
         // 2. 建立连接
         URL url = new URL("https://api.deepseek.com/chat/completions");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
-        connection.setRequestProperty("Authorization", "Bearer " + apiKey);
+        connection.setRequestProperty("Authorization", "Bearer " + apikey);
         connection.setDoOutput(true);
 
         // 3. 发送请求

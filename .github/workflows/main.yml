@@ -31,3 +31,4 @@ jobs:
         run: java -jar ./libs/ai-code-view-1.0.jar
         env:
           GITHUB_TOKEN: ${{ secrets.CODE_TOKEN }}
+          API_KEY: ${{ secrets.API_KEY
