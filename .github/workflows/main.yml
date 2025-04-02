@@ -46,7 +46,7 @@ jobs:
       - name: Run OpenAiCodeReview
         run: java -jar ./libs/ai-code-view-1.0.jar
         env:
-          GITHUB_TOKEN: ${{ secrets.CODE_TOKEN }}
+          CODE_TOKEN: ${{ secrets.CODE_TOKEN }}
           API_KEY: ${{ secrets.API_KEY}}
           API_HOST: ${{ secrets.API_HOST }}
           REVIEW_URL: ${{ secrets.REVIEW_URL }}
