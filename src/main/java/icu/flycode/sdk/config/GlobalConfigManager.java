@@ -5,34 +5,48 @@ import icu.flycode.sdk.domain.Git.GitInfo;
 import icu.flycode.sdk.domain.Template.WechatInfo;
 
 /**
- * 全局配置管理器，单例模式
+ * 全局配置管理器
  */
 public class GlobalConfigManager {
-    private static volatile GlobalConfigManager instance;
 
+    // 单例实例
+    private static volatile GlobalConfigManager INSTANCE;
+
+    // 全局配置
     private WechatInfo wechatInfo;
-
+    private GitInfo gitInfo;
     private OpenAiInfo openAiInfo;
 
-    private GitInfo gitInfo;
+    // 私有构造函数，防止外部实例化
+    private GlobalConfigManager() {}
 
-    public GlobalConfigManager() {
-    }
-
-
+    /**
+     * 获取单例实例（双检锁实现）
+     *
+     * @return 单例对象
+     */
     public static GlobalConfigManager getInstance() {
-        if (instance == null) {
-            synchronized (GlobalConfigManager.class) {
-                instance = new GlobalConfigManager();
+        if (INSTANCE == null) { // 第一次检查
+            synchronized (GlobalConfigManager.class) { // 加锁
+                if (INSTANCE == null) { // 第二次检查
+                    INSTANCE = new GlobalConfigManager();
+                }
             }
         }
-        return instance;
+        return INSTANCE;
     }
 
+    /**
+     * 初始化全局配置
+     *
+     * @param wechatInfo 微信配置信息
+     * @param gitInfo    Git 项目信息
+     * @param openAiInfo OpenAI 配置信息
+     */
     public void init(WechatInfo wechatInfo, GitInfo gitInfo, OpenAiInfo openAiInfo) {
         this.wechatInfo = wechatInfo;
-        this.openAiInfo = openAiInfo;
         this.gitInfo = gitInfo;
+        this.openAiInfo = openAiInfo;
     }
 
     /**
