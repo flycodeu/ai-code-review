@@ -33,8 +33,7 @@ public class AICodeReview {
         GitInfo gitInfo = new GitInfo(commitProject, commitAuthor, commitBranch, commitMessage, githubToken, reviewUrl);
         WechatInfo wechatInfo = new WechatInfo(wxAppid, wxSecret, toUser, templateId);
         OpenAiInfo openAiInfo = new OpenAiInfo(apiKey, apiHost);
-        GlobalConfigManager globalConfigManager = new GlobalConfigManager();
-        globalConfigManager.init(wechatInfo, gitInfo, openAiInfo);
+        GlobalConfigManager.getInstance().init(wechatInfo, gitInfo, openAiInfo);
 
         GitCommand gitCommand = new GitCommand();
         IOpenAiService openAiService = new DeepSeekChatServiceImpl();
