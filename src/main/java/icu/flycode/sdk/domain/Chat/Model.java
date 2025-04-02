@@ -1,4 +1,4 @@
-package icu.flycode.sdk.domain;
+package icu.flycode.sdk.domain.Chat;
 
 public enum Model {
 

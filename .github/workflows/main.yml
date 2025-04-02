@@ -27,8 +27,34 @@ jobs:
       - name: Copy openai-code-review-sdk JAR
         run: mvn dependency:copy -Dartifact=icu.flycode:ai-code-view:1.0 -DoutputDirectory=./libs
 
+      - name: Get repository name
+        id: repo-name
+        run: echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
+
+      - name: Get branch name
+        id: branch-name
+        run: echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+
+      - name: Get commit author
+        id: commit-author
+        run: echo "COMMIT_AUTHOR=$(git log -1 --pretty=format:'%an <%ae>')" >> $GITHUB_ENV
+
+      - name: Get commit message
+        id: commit-message
+        run: echo "COMMIT_MESSAGE=$(git log -1 --pretty=format:'%s')" >> $GITHUB_ENV
+
       - name: Run OpenAiCodeReview
         run: java -jar ./libs/ai-code-view-1.0.jar
         env:
           GITHUB_TOKEN: ${{ secrets.CODE_TOKEN }}
           API_KEY: ${{ secrets.API_KEY}}
+          API_HOST: ${{ secrets.API_HOST }}
+          REVIEW_URL: ${{ secrets.REVIEW_URL }}
+          TEMPLATE_ID: ${{ secrets.TEMPLATE_ID }}
+          TO_USER: ${{ secrets.TO_USER }}
+          WX_APPID: ${{ secrets.WX_APPID }}
+          WX_SECRET: ${{ secrets.WX_SECRET }}
+          COMMIT_BRANCH: ${{ env.BRANCH_NAME }}
+          COMMIT_AUTHOR: ${{ env.COMMIT_AUTHOR }}
+          COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
+          COMMIT_PROJECT: ${{ env.REPO_NAME }}
