@@ -99,7 +99,7 @@ public class GitCommand {
         git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider(token, "")).call();
 
         // 6. 返回提交地址
-        return gitInfo + "/blob/master/" + dateFolderName + "/" + fileName;
+        return gitInfo.getGithubReviewUrl() + "/blob/master/" + dateFolderName + "/" + fileName;
     }
 
 
